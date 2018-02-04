@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'lollipop',
     'pinpop',
     'sweet',
@@ -58,7 +58,7 @@ ACCOUNT_ACTIVATION_DAYS = 3
 # If True, the user will be automatically logged in
 REGISTRATION_AUTO_LOGIN = True
 # Successful login arrival page
-LOGIN_REDIRECT_URL = '/index/'
+LOGIN_REDIRECT_URL = '//'
 # Page not-logged in users are redirected to if trying to access stuff that @login_required
 LOGIN_URL = '/accounts/login/'
 

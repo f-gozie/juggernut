@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Index
+{% endblock %}
+
+{% block body_block %}
+	{% if user.is_authenticated %}
+		<h1>Hello {{ user.username.title }}, this is the index Page</h1>
+	{% else %}
+		<h1>Hello, This is the index Page</h1>
+	{% endif %}
+{% endblock %}
