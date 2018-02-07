@@ -65,7 +65,7 @@ LOGIN_URL = '/accounts/login/'
 # Host for email
 EMAIL_HOST = 'smtp.gmail.com'
 # Port for email
-EMAIL_PORT = 567
+EMAIL_PORT = 587
 # Host user
 EMAIL_HOST_USER = 'fagozie43@gmail.com'
 # Host Password
@@ -75,6 +75,7 @@ DEFAULT_FROM_EMAIL = 'fagozie43@gmail.com'
 # Use tls?
 EMAIL_USE_TLS = True
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend',
+# EMAIL_USE_SSL = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
