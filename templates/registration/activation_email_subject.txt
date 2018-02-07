@@ -1,0 +1,1 @@
+Activate your juggernut.com account - you have {{ expiration_days }} days!

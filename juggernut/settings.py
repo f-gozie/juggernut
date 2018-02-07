@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     # 'django.contrib.sites',
     'lollipop',
     'pinpop',
@@ -58,9 +59,22 @@ ACCOUNT_ACTIVATION_DAYS = 3
 # If True, the user will be automatically logged in
 REGISTRATION_AUTO_LOGIN = True
 # Successful login arrival page
-LOGIN_REDIRECT_URL = '//'
+LOGIN_REDIRECT_URL = '/index/'
 # Page not-logged in users are redirected to if trying to access stuff that @login_required
 LOGIN_URL = '/accounts/login/'
+# Host for email
+EMAIL_HOST = 'smtp.gmail.com'
+# Port for email
+EMAIL_PORT = 567
+# Host user
+EMAIL_HOST_USER = 'fagozie43@gmail.com'
+# Host Password
+EMAIL_HOST_PASSWORD = 'agoziefavo55'
+# From email
+DEFAULT_FROM_EMAIL = 'fagozie43@gmail.com'
+# Use tls?
+EMAIL_USE_TLS = True
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend',
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
