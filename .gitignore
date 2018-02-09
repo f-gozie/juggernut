@@ -1,4 +1,10 @@
+
+#Databases and Secret Keys
 db.sqlite3
+
 /pinpop
+
+#To ignore compiled files
 *.pyc
-sweet/migrations
+__pycache__
+*.log

@@ -1,7 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from sweet.models import UserProfile
+# from sweet.models import UserProfile
 from django.contrib import admin
+from .models import Product, Operator, Category
 
-# Register your models here.
-admin.site.register(UserProfile)
+class CategoryAdmin(admin.ModelAdmin):
+	list_display = ['name', 'slug']
+	prepopulated_fields = {'slug':('name',)}
+
+class ProductAdmin(admin.ModelAdmin):
+	list_display = ['name', 'slug', 'price', 'quantity', 'created', 'updated']
+	list_filter = ['created', 'updated']
+	list_editable = ['price', 'quantity']
+	prepopulated_fields = {'slug':('name',)}
+
+# admin.site.register(UserProfile)
+admin.site.register(Product, ProductAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Operator)

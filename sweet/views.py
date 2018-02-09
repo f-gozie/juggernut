@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-from sweet.forms import UserForm
+from django.shortcuts import render, get_object_or_404
+# from sweet.forms import UserForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from .models import Category, Product
 
 # Create your views here.
 
 def index(request):
-	return render(request, 'index.html', {})
+	categories = Category.objects.all()
+	return render(request, 'index.html', {'categories':categories})
 
 def register(request):
 	registered = False
