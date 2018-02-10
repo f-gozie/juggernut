@@ -4,5 +4,5 @@ from __future__ import unicode_literals
 from django.apps import AppConfig
 
 
-class PinpopConfig(AppConfig):
-    name = 'pinpop'
+class CartConfig(AppConfig):
+    name = 'cart'
