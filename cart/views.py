@@ -18,7 +18,7 @@ def cart_add(request, product_id):
 	return redirect("sweet:product_view")
 
 def cart_clear(request):
-	cart = Cart(request):
+	cart = Cart(request)
 	product = Product.objects.all()
 	cart.remove(product)
 	return redirect("cart:cart_detail")
