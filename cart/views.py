@@ -32,3 +32,6 @@ def cart_remove(request):
 def cart_detail(request):
 	cart = Cart(request)
 	return render(request, 'cart/detail.html', {'cart':cart})
+
+
+# Integrating 
