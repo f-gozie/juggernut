@@ -16,7 +16,7 @@ def cart_add(request, product_id):
 		clean = form.cleaned_data
 		cart.add(product=product, quantity=clean['quantity'], update_quantity=clean['update'])
 	return redirect("sweet:product_view")
-# soft
+
 def cart_clear(request):
 	cart = Cart(request)
 	product = Product.objects.all()
