@@ -17,17 +17,17 @@ def cart_add(request, product_id):
 		cart.add(product=product, quantity=clean['quantity'], update_quantity=clean['update'])
 	return redirect("sweet:product_view")
 
-def cart_clear(request):
-	cart = Cart(request)
-	product = Product.objects.all()
-	cart.remove(product)
-	return redirect("cart:cart_detail")
+# def cart_clear(request):
+# 	cart = Cart(request)
+# 	product = Product.objects.all()
+# 	cart.remove(product)
+# 	return redirect("cart:cart_detail")
 
-def cart_remove(request):
-	cart = Cart(request)
-	product = get_object_or_404(Product, id=product_id)
-	cart.remove(product)
-	return redirect("cart:cart_detail")
+# def cart_remove(request):
+# 	cart = Cart(request)
+# 	product = get_object_or_404(Product, id=product_id)
+# 	cart.remove(product)
+# 	return redirect("cart:cart_detail")
 
 def cart_detail(request):
 	cart = Cart(request)
