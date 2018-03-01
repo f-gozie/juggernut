@@ -21,8 +21,8 @@ from sweet import views
 
 urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
-	url(r'^cart/', include('cart.urls')),
-	url(r'^orders/', include('orders.urls')),
+	# url(r'^cart/', include('cart.urls')),
+	# url(r'^orders/', include('orders.urls')),
 	url(r'^', include('sweet.urls')),
     url(r'^', include('django.contrib.auth.urls')),	
 	# url(r'^', views.index, name='index'),

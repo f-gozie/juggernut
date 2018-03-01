@@ -61,18 +61,19 @@ class Category(models.Model):
 	def __unicode__(self):
 		return self.name
 
-class Product(models.Model):
+class Order(models.Model):
 	name = models.CharField(max_length=20)
 	slug = models.SlugField(db_index=True, max_length=50)
 	category = models.ForeignKey(Category)
+	description = models.TextField()
 	gender = models.CharField(max_length=2,choices=(('M','Male'),('F','Female')))
-	brand = models.CharField(max_length=20, unique=True)
 	quantity = models.PositiveIntegerField(default=0)
-	price = models.DecimalField(max_digits=10, decimal_places=2, default=0, null=False)
+	price = models.DecimalField(max_digits=10, decimal_places=2, default=200, null=False)
 	operator_id = models.ForeignKey(Operator)
 	transport_cost= models.IntegerField(default=200)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
+
 	class Meta:
 		ordering = ('name',)
 		index_together = (('id', 'slug'),)

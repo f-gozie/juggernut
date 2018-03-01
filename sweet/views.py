@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from .models import Category, Product
+from .models import Category, Order
 
 # Create your views here.
 
@@ -57,3 +57,7 @@ def user_login(request):
 def user_logout(request):
 	logout(request)
 	return HttpResponseRedirect(reverse('index'))
+
+def shirt_order(request):
+	if request.method == 'POST':
+		shirtform = CreateOrderForm(data=request.POST)

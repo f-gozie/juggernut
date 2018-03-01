@@ -1,10 +1,11 @@
 
-#Databases and Secret Keys
+# Databases and Secret Keys
 db.sqlite3
 
+# Unnecessary folders and files
 /pinpop
 
-#To ignore compiled files
+# To ignore compiled and logged files
 *.pyc
 __pycache__
 *.log

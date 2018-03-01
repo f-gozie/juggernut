@@ -7,7 +7,6 @@
 </head>
 
 <body>
-    <hr/>
     <div>
         <ul>
             <li><a href="{% url 'index' %}">Home</a></li>
@@ -19,6 +18,7 @@
             {% endif %}
         </ul>
     </div>
+    <hr/>
     {% block body_block %}
     <div id="sidebar">
         {% block sidebar %}{% endblock %}

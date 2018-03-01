@@ -12,3 +12,8 @@ class UserForm(forms.ModelForm):
 # class UserProfileForm(forms.ModelForm):
 # 	class Meta:
 # 		model = UserProfile
+
+class CreateOrderForm(forms.ModelForm):
+	class Meta:
+		model = Product
+		exclude = ('transport_cost', 'created', 'updated', 'price', 'operator_id', )
