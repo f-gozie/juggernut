@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Register
+{% endblock %}
+
+{% block body_block %}
+	{% if registered %}
+		<h1>Thank you for registering</h1>
+	{% else %}
+		<h1>Register below</h1>
+		<form id='vendorform' method="post" action="{% url 'register_vendor' %}">
+			{% csrf_token %}
+			<!-- Display each form -->
+			{{ vendorform.as_p }}
+			<input type="submit" name="submit" value="Register">
+		</form>
+	{% endif %}
+{% endblock %}

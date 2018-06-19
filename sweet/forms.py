@@ -1,6 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
-from sweet.models import UserProfile
+# from sweet.models import UserProfile
+from django.contrib.auth.forms import UserCreationForm
+from .models import Profile, Image
+
+def file_size(value):
+	limit = 1.5 * 1024 * 1024
+	if value.size > limit:
+		raise forms.ValidationError("File size too large. Must not exceed 1.5 MiB.")
 
 class UserForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput())
@@ -9,11 +16,33 @@ class UserForm(forms.ModelForm):
 		model = User
 		fields = ('first_name', 'last_name', 'username', 'email', 'password')
 
-# class UserProfileForm(forms.ModelForm):
-# 	class Meta:
-# 		model = UserProfile
+	# def clean_email(self):
+	# 	email = self.cleaned_data.get('email')
+ #    	if email and User.objects.filter(email=email).exists():
+ #    		raise forms.ValidationError('Email address already in use. Must be unique')
 
-class CreateOrderForm(forms.ModelForm):
+ #    	return email
+
+class VendorSignUpForm(forms.ModelForm):
+	username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Name of brand','style': "font-weight:bold; font-family:'Calibri';",'autofocus':'autofocus' }), max_length=15)
+	phonenumber = forms.CharField(widget=forms.NumberInput(attrs={'placeholder':'Phone Number','style': "font-weight:bold; font-family:'Calibri';"}), max_length=11,required=False)
+	password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Input Password','style': "font-weight:bold; font-family:'Calibri';"}))
+	password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Input Password Again','style': "font-weight:bold; font-family:'Calibri';"}))
+
 	class Meta:
-		model = Product
-		exclude = ('transport_cost', 'created', 'updated', 'price', 'operator_id', )
+		model = User
+		fields = ('email','username','phonenumber','password1','password2')
+
+class BrandProfileForm(forms.ModelForm):
+	phonenumber = forms.CharField(required=False)
+	profilepicture = forms.ImageField(required=False, validators=[file_size])
+
+	class Meta:
+		model = Profile
+		fields = ('profilepicture', 'phonenumber')
+		
+
+# class CreateOrderForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Product
+# 		exclude = ('transport_cost', 'created', 'updated', 'price', 'operator_id', )
