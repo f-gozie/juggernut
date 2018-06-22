@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 # from sweet.models import UserProfile
 from django.contrib import admin
-from .models import Order, Operator, Category
+from .models import Order, Category, Profile, Image
 
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = ['name', 'slug']
@@ -17,4 +17,6 @@ class ProductAdmin(admin.ModelAdmin):
 # admin.site.register(UserProfile)
 admin.site.register(Order, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Operator)
+# admin.site.register(Operator)
+admin.site.register(Profile)
+admin.site.register(Image)

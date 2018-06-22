@@ -12,30 +12,33 @@ from io import BytesIO
 from django.core.files.base import ContentFile
 # Create your models here.
 
-class Operator(models.Model):
-	user = models.OneToOneField(User)
-	domain = models.URLField()
-	profile_picture = models.ImageField(upload_to="profile_images", blank=True)
-	description = models.TextField()
-	occupation = models.CharField(max_length=2, choices=(('D', 'DryCleaner'), ('T', 'Tailor')))
-	gender = models.CharField(max_length=2,choices=(('M','Male'),('F','Female')))
-	def save(self, *args, **kwargs):
-		self.is_staff = True
-		super(Operator, self).save(*args, **kwargs)
+# class Operator(models.Model):
+# 	user = models.OneToOneField(User)
+# 	domain = models.URLField()
+# 	profile_picture = models.ImageField(upload_to="profile_images", blank=True)
+# 	description = models.TextField()
+# 	occupation = models.CharField(max_length=2, choices=(('D', 'DryCleaner'), ('T', 'Tailor')))
+# 	gender = models.CharField(max_length=2,choices=(('M','Male'),('F','Female')))
+# 	def save(self, *args, **kwargs):
+# 		self.is_staff = True
+# 		super(Operator, self).save(*args, **kwargs)
 
-	def __str__(self):
-		return self.user.username
+# 	def __str__(self):
+# 		return self.user.username
 
-	def __unicode__(self):
-		return self.user.username
+# 	def __unicode__(self):
+# 		return self.user.username
 
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete = models.CASCADE)
+	domain = models.URLField()
 	# Set profile_picture required to true, people don't trust anonymity.
 	profile_picture = models.ImageField(upload_to='profile_images', blank=False)
 	phonenumber = models.CharField(default="0", max_length=11)
 	email_confirmed = models.BooleanField(default=False)
 	visits = models.IntegerField(default=0)
+	occupation = models.CharField(max_length=2, choices=(('D', 'DryCleaner'), ('T', 'Tailor')))
+	gender = models.CharField(max_length=2, choices=(('M','Male'),('F', 'Female')))
 	description = models.CharField(max_length=2500, blank=True, default='description')
 
 	def save(self, *args, **kwargs):
@@ -115,7 +118,7 @@ class Order(models.Model):
 	gender = models.CharField(max_length=2,choices=(('M','Male'),('F','Female')))
 	quantity = models.PositiveIntegerField(default=0)
 	price = models.DecimalField(max_digits=10, decimal_places=2, default=200, null=False)
-	operator_id = models.ForeignKey(Operator)
+	operator_id = models.ForeignKey(Profile)
 	transport_cost= models.IntegerField(default=200)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)

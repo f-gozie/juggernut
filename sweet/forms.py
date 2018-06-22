@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 # from sweet.models import UserProfile
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile, Image
+from django.contrib.auth import authenticate
 
 def file_size(value):
 	limit = 1.5 * 1024 * 1024
@@ -22,6 +23,26 @@ class UserForm(forms.ModelForm):
  #    		raise forms.ValidationError('Email address already in use. Must be unique')
 
  #    	return email
+
+class LoginForm(forms.Form):
+	username = forms.CharField(label='Username', widget=forms.TextInput(attrs={ 'style':"font-weight:bold;font-size:16px; font-family:'Calibri"}))
+	password = forms.CharField(widget=forms.PasswordInput(attrs={ 'style':"font-weight:bold;font-size:16px; font-family:'Calibri"}))
+
+	def clean(self, *args, **kwargs):
+		username = self.cleaned_data.get('username')
+		username = username.lower()
+		password = self.cleaned_data.get('password')
+
+		if username and password:
+			user = authenticate(username=username, password=password)
+			if not user:
+				raise forms.ValidationError("Username and Password do not match!")
+
+		return super(LoginForm, self).clean(*args, **kwargs)
+	class Meta:
+		model = User
+		fields = ('username', 'password',)
+
 
 class VendorSignUpForm(forms.ModelForm):
 	username = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Name of brand','style': "font-weight:bold; font-family:'Calibri';",'autofocus':'autofocus' }), max_length=15)

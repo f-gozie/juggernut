@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+
+{% block body_block %}
+    <section class="login">
+      <div class="container">
+      <div class="col-sm-1">
+
+      </div>
+
+        <div class="col-sm-5 sign-in">
+          <h3 class="text-center">Login <span class="fa fa-sign-in"></span></h3>
+          <form class="form-group" action="." method="post">
+            {% csrf_token %}
+            <label style="font-weight:400;" for="">Username:</label>
+            <input  type="text" class="form-control" style="text-transform:lowercase;" name="username" required id="id_username" value="">
+            <br>
+            <label for="">Password:</label>
+            <input type="password" class="form-control" name="password" required id="id_password" value="">
+            <br>
+            <strong style="font-size:14px; color:red">{{form.errors}}</strong>
+            <button type="submit" class="btn btn-block btn-default" name="button">Submit</button>
+          </form>
+        </div>
+        <div class="col-sm-1">
+        </div>
+        <div class="create-account col-sm-4">
+          <h3>New Customer?</h3>
+          <br>
+          <p>Create an account with us and you'll be able to:</p>
+          <ul>
+            <li>Check out faster</li>
+            <li>Save your Shipping address</li>
+            <li>Access your cart items from any device</li>
+            <li>Get tracking notifications on your order</li>
+          </ul>
+          <a class="btn btn-default create-account-button" href="{% url 'register_vendor' %}" style="color:white;"> Create account</a>
+        </div>
+
+
+
+      </div>
+    </section>
+{% endblock %}

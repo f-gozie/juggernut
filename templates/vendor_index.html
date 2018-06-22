@@ -8,14 +8,7 @@
 {% block body_block %}
 	{% if user.is_authenticated %}
 		<h1>Hello {{ user.username.title }}, this is the index Page</h1>
-		<h1>What are you looking for</h1>
-		<!-- {% if categories %} -->
-			<div>
-				<h1>What exactly are you looking for?</h1>
-				<br>
-				
-			</div>
-		<!-- {% endif %} -->
+		<h2>This is just for vendors</h2>
 	{% else %}
 		<h1>Hello, This is the index Page</h1>
 	{% endif %}
