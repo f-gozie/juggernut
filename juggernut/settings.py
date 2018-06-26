@@ -29,6 +29,9 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = ')u#-6zt#-1s_-n_1=w%u8dke8-7$n9qkqagu08(--toc#y27+%'
 
+TWILIO_ACCOUNT_SID = 'ACdcac1332fe0b112dd6b261ffaaeb29b0'
+TWILIO_AUTH_TOKEN = '5bde3ef5d645c638f894753f792b1e22'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

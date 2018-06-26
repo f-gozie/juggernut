@@ -14,6 +14,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
+from django.contrib.auth.forms import PasswordChangeForm
 
 # Create your views here.
 
@@ -142,6 +143,25 @@ def vendor_login(request):
 def vendor_logout(request):
 	logout(request)
 	return redirect('vendor_login')
+
+def password_change(request):
+	if request.method == 'POST':
+		form = PasswordChangeForm(request.user, request.POST)
+		if form.is_valid():
+			user = form.save()
+			update_session_auth_hash() # This is vital so as not to log user out during current session
+			message.success(request, "Your password was successfully updated")
+			return redirect('index')
+		else:
+			messages.error(request, "Please take a look at the completed form and correct all errors")
+	else:
+		form = PasswordChangeForm(request.user)
+	return render(request, 'password_change.html', {'form':form})
+
+
+
+
+
 
 # def register_vendor_ose(request):
 # 	if request.user.is_authenticated:

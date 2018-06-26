@@ -10,6 +10,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from io import BytesIO
 from django.core.files.base import ContentFile
+import requests
 # Create your models here.
 
 # class Operator(models.Model):
@@ -84,7 +85,7 @@ class Image(models.Model):
 
 			self.image.save(temporary_name, content=ContentFile(new_image_io.getvalue()), save=False)
 
-		super(Images, self).save(*args, **kwargs)
+		super(Image, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return self.vendor.username
@@ -109,6 +110,26 @@ class Category(models.Model):
 
 	def __unicode__(self):
 		return self.name
+
+
+def send_sms(my_sender, receiver, my_message):
+	api_username = "juggernut"
+	api_password = "juggernut"
+	parameters = {"username":api_username, "password":api_password, "destination":receiver, "message":my_message, "sender":my_sender}
+	response = requests.post("http://www.supertextng.com/api.php?", data=parameters)
+	return response
+
+
+
+# class SendTestSMS(models.Model):
+# 	to_number = models.CharField(max_length=20)
+# 	from_number = models.CharField(max_length=20)
+# 	sms_sid = models.CharField(max_length=50, default='', blank=True)
+# 	account_sid = models.CharField(max_length=50, default="", blank=True)
+# 	created_at = models.DateTimeField(auto_now_add=True)
+# 	sent_at = models.DateTimeField(auto_now_add=True)
+# 	delivered_at = models.DateTimeField(null=True, blank=True)
+# 	status = models.CharField(max_length=20, default="", blank=True)
 
 class Order(models.Model):
 	name = models.CharField(max_length=20)
