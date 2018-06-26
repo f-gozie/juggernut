@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 # from sweet.models import UserProfile
 from django.contrib import admin
-from .models import Order, Category, Profile, Image
+from .models import Category
+# from .models import Order
 
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = ['name', 'slug']
@@ -14,9 +15,4 @@ class ProductAdmin(admin.ModelAdmin):
 	list_editable = ['price', 'quantity']
 	prepopulated_fields = {'slug':('name',)}
 
-# admin.site.register(UserProfile)
-admin.site.register(Order, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
-# admin.site.register(Operator)
-admin.site.register(Profile)
-admin.site.register(Image)

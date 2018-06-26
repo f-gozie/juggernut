@@ -9,15 +9,15 @@
 <body>
     <div>
         <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'sweet:index' %}">Home</a></li>
             {% if not user.is_authenticated %}
                 <li><a href="{% url 'registration_register' %}">Sign Up</a></li>
-                <li><a href="{% url 'register_vendor' %}">Sign Up for Vendor</a></li>
-                <li><a href="{% url 'vendor_login' %}">Login</a></li>
+                <li><a href="{% url 'myregistration:register_vendor' %}">Sign Up for Vendor</a></li>
+                <li><a href="{% url 'myregistration:vendor_login' %}">Login</a></li>
 
             {% else %}
-                <li><a href="{% url 'auth_logout' %}?next={% url 'index' %}">Logout</a></li>
-                <!-- <li><a href="{% url 'vendor_logout' %}?next={% url 'index' %}">Logout vendor</a></li> -->
+                <li><a href="{% url 'auth_logout' %}?next={% url 'sweet:index' %}">Logout</a></li>
+                <!-- <li><a href="{% url 'myregistration:vendor_logout' %}?next={% url 'sweet:index' %}">Logout vendor</a></li> -->
             {% endif %}
         </ul>
     </div>

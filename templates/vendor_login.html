@@ -31,7 +31,7 @@
           <!-- Customer password reset -->
           <p><p>Are you a customer that forgot their password? Click <a href="{% url 'auth_password_reset' %}">here</a> to reset password</p></p>
           <!-- Vendor password change -->
-          <p>Are you a vendor that wants to change their password? Click <a href="{% url 'password_change' %}">here</a> to change your password</p>
+          <p>Are you a vendor that wants to change their password? Click <a href="{% url 'myregistration:password_change' %}">here</a> to change your password</p>
           <!-- Vendor password reset -->
           <p>Are you a vendor that forgot their password? Click <a href="{% url 'password_reset' %}">here</a> to reset your password</p>
           <br>
@@ -42,7 +42,7 @@
             <li>Access your cart items from any device</li>
             <li>Get tracking notifications on your order</li>
           </ul>
-          <a class="btn btn-default create-account-button" href="{% url 'register_vendor' %}" style="color:white;"> Create account</a>
+          <a class="btn btn-default create-account-button" href="{% url 'myregistration:register_vendor' %}" style="color:white;"> Create account</a>
         </div>
 
 

@@ -51,10 +51,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     # 'django.contrib.sites',
-    # 'lollipop',
-    'orders',
-    # 'pinpop',
-    'cart',
+    # 'orders',
+    # 'cart',
+    'myregistration',
     'sweet',
 ]
 
