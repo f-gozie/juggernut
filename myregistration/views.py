@@ -47,9 +47,16 @@ def activate(request, uidb64, token):
 		user.is_email_verified = True
 		user.save()
 		login(request, user)
-		return HttpResponse('Thank you for your email confirmation. Now you can login to your account.')
+		if user.is_staff:
+			return redirect('sweet:vendor_index')
+		else:
+			return redirect('sweet:index')
+		# return HttpResponse('Thank you for your email confirmation. Now you can login to your account.')
 	else:
 		return HttpResponse("Invalid activation link")
+
+def email_confirm(request):
+	return render(request, "email_confirm.html", {})
 
 def register_vendor(request):
 	registered = False
@@ -68,14 +75,14 @@ def register_vendor(request):
 			# current_site = get_current_site(request)
 			text_content = "Account Activation Email"
 			mail_subject = "Activate you Juggernut account"
-			template_name = 'acc_activate_email.html'
+			template_name = 'account_activate.html'
 			from_email = vendorform.cleaned_data.get('email')
 			recipients = [vendor.email]
 			kwargs = {
 				"uidb64":urlsafe_base64_encode(force_bytes(vendor.pk)).decode(),
 				"token":account_activation_token.make_token(vendor)
 			}
-			activation_url = reverse("activate", kwargs=kwargs)
+			activation_url = reverse("myregistration:activate", kwargs=kwargs)
 
 			activation_url = "{0}://{1}{2}".format(request.scheme, request.get_host(), activation_url)
 
@@ -87,7 +94,7 @@ def register_vendor(request):
 			email = EmailMultiAlternatives(mail_subject, text_content, from_email, recipients)
 			email.attach_alternative(html_content, "text/html")
 			email.send()
-			return HttpResponse("Please confirm your email address")
+			return redirect("myregistration:email_confirm")
 			registered = True
 		else:
 			print(vendorform.errors)
@@ -117,6 +124,7 @@ def vendor_login(request):
 			errors = "Invalid Username or Password"
 	return render(request, 'vendor_login.html', {'form':form, 'errors':errors})
 
+@login_required
 def vendor_logout(request):
 	logout(request)
 	return redirect('vendor_login')
@@ -158,33 +166,3 @@ def user_login(request):
 def user_logout(request):
 	logout(request)
 	return HttpResponseRedirect(reverse('sweet:index'))
-
-# def register_vendor_ose(request):
-# 	if request.user.is_authenticated:
-# 		return HttpResponseRedirect("/")
-# 	if request.method == 'POST':
-# 		form = VendorSignUpForm(request.POST)
-# 		form2 = BrandProfileForm(request.POST)
-# 		if form.is_valid() and form2.is_valid():
-# 			user = form.save(commit=False)
-# 			user.username = user.username.lower()
-# 			user.is_active = False
-# 			user.is_staff = True
-# 			user.save()
-# 			user.profile.phonenumber = number
-# 			user.save()
-
-# 			# send_sms("Juggernut", number, "Account Confirmation Message. Thank you for signing to Juggernut. Your presence is highly appreciated")
-
-# 			'''
-# 			current_site = get_current_site(request)
-# 			subject = "Activate your Juggernut Account"
-# 			message = render_to_string('registration/activation_email.html', {'user':user, 'domain':current_site.domain, 'uid':urlsafe_base64_encode(force_bytes(user.pk)), 'token':account_activation_token.make_token(user),})
-# 			user.email_user(subject, message)
-# 			return redirect('account_activation_sent')
-
-# 			'''
-# 	else:
-# 		form = VendorSignUpForm()
-# 		form2 = BrandProfileForm()
-# 	return render(request, 'registration/vendor_registration_form.html', {'form':form, 'form2':form2})
