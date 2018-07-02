@@ -34,7 +34,7 @@ def register(request):
 	else:
 		userform = UserForm()
 
-	return render(request, 'sweet/register.html', {'userform':userform, 'registered':registered})
+	return render(request, 'myregistration/register.html', {'userform':userform, 'registered':registered})
 
 def activate(request, uidb64, token):
 	try:
@@ -56,7 +56,7 @@ def activate(request, uidb64, token):
 		return HttpResponse("Invalid activation link")
 
 def email_confirm(request):
-	return render(request, "email_confirm.html", {})
+	return render(request, "myregistration/email_confirm.html", {})
 
 def register_vendor(request):
 	registered = False
@@ -75,7 +75,7 @@ def register_vendor(request):
 			# current_site = get_current_site(request)
 			text_content = "Account Activation Email"
 			mail_subject = "Activate you Juggernut account"
-			template_name = 'account_activate.html'
+			template_name = 'myregistration/account_activate.html'
 			from_email = vendorform.cleaned_data.get('email')
 			recipients = [vendor.email]
 			kwargs = {
@@ -101,7 +101,7 @@ def register_vendor(request):
 	else:
 		vendorform = VendorSignUpForm()
 
-	return render(request, 'register_vendor.html', {'vendorform':vendorform, 'registered':registered})
+	return render(request, 'myregistration/register_vendor.html', {'vendorform':vendorform, 'registered':registered})
 
 def vendor_login(request):
 	if request.user.is_authenticated:
@@ -122,7 +122,7 @@ def vendor_login(request):
 				return redirect('sweet:index')
 		else:
 			errors = "Invalid Username or Password"
-	return render(request, 'vendor_login.html', {'form':form, 'errors':errors})
+	return render(request, 'myregistration/vendor_login.html', {'form':form, 'errors':errors})
 
 @login_required
 def vendor_logout(request):
@@ -141,7 +141,7 @@ def password_change(request):
 			messages.error(request, "Please take a look at the completed form and correct all errors")
 	else:
 		form = PasswordChangeForm(request.user)
-	return render(request, 'password_change.html', {'form':form})
+	return render(request, 'myregistration/password_change.html', {'form':form})
 
 def user_login(request):
 	if request.method == 'POST':
@@ -160,7 +160,7 @@ def user_login(request):
 			print("Invalid login details: {0}, {1}".format(username, password))
 			return HttpResponse("Invalid login details supplied.")
 	else:
-		return render(request, 'sweet/login.html', {})
+		return render(request, 'myregistration/login.html', {})
 
 @login_required
 def user_logout(request):
